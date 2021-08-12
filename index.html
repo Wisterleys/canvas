@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>exibir PDF</title>
+    <style>
+        #can{
+            display: block;
+            width: 500px;
+            height: 500px;
+            margin: auto;
+            border: 1px solid red;
+        }
+    </style>
+</head>
+<body>
+    <canvas id="can"></canvas>
+    <script>
+        const canvas = document.querySelector("#can")
+        const ctx = canvas.getContext("2d")
+        const image = new Image();
+        let dir = 0
+        let x = 0
+        let y = 0
+        image.src="extra.jpg"
+        function desenha(){
+            const {offsetWidth,offsetHeight} = canvas
+            console.log(offsetWidth)
+            ctx.clearRect(0,0,500,500)
+            ctx.drawImage(image, x,y,200,100)
+            requestAnimationFrame(desenha)
+        }
+        image.addEventListener("load",e=>{
+            canvas.style.width= window.innerWidth+"px"
+            canvas.style.height= window.innerHeight+"px"
+            desenha()
+        })
+    </script>
+</body>
+</html>
